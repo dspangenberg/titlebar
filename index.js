@@ -4,6 +4,7 @@ var fs = require('fs');
 var defaultcss = require('defaultcss');
 var domify = require('domify');
 var $ = require('dombo');
+var jQuery = require('jquery');
 
 var stoplight = require('./stoplight');
 
@@ -27,10 +28,17 @@ var TitleBar = function(options) {
 
 	if(this._options.draggable !== false) $element.addClass('webkit-draggable');
 
+	
+
+
 	var self = this;
 	var close = $('.titlebar-close', element)[0];
 	var minimize = $('.titlebar-minimize', element)[0];
 	var fullscreen = $('.titlebar-fullscreen', element)[0];
+
+	
+
+	
 
 	$element.on('click', function(e) {
 		if(e.target === close) self.emit('close', e);
@@ -43,14 +51,25 @@ var TitleBar = function(options) {
 		if(e.target === close || e.target === minimize || e.target === fullscreen) return;
 		self.emit('maximize', e);
 	});
+
+	
+
+
 };
 
 util.inherits(TitleBar, events.EventEmitter);
+
+TitleBar.prototype.setTitle = function(title) {
+
+	jQuery('#titlebar-title').html(title);
+}	
 
 TitleBar.prototype.appendTo = function(target) {
 	if(typeof target === 'string') target = $(target)[0];
 	if(this._options.style !== false) defaultcss('titlebar', style);
 
+	
+	
 	var $element = $(this.element);
 
 	$window.on('keydown', this._onkeydown = function(e) {
@@ -62,6 +81,9 @@ TitleBar.prototype.appendTo = function(target) {
 	});
 
 	target.appendChild(this.element);
+
+	if(this._options.title !='') this.setTitle(this._options.title);
+
 	return this;
 };
 

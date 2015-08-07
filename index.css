@@ -3,12 +3,25 @@
 	background-color: #f6f6f6;
 }
 
-.titlebar.webkit-draggable {
-	-webkit-app-region: drag;
-}
 
 .titlebar-stoplight {
 	float: left;
+
+}
+
+#titlebar-title {
+	position: absolute;
+	left:0;
+	right:0;
+	width:100%;
+	height: 24px;
+	padding:2px;
+	text-align: center;
+	font-weight:500;
+	-webkit-user-select: none;
+	-webkit-app-region: drag;
+	cursor: default;
+	z-index: 9000;
 }
 
 .titlebar:after,
@@ -53,12 +66,8 @@
 	width: 12px;
 	height: 12px;
 	border-radius: 6px;
-}
-
-.titlebar.webkit-draggable .titlebar-close,
-.titlebar.webkit-draggable .titlebar-minimize,
-.titlebar.webkit-draggable .titlebar-fullscreen {
-	-webkit-app-region: no-drag;
+  -webkit-app-region: no-drag;
+	z-index: 9999;
 }
 
 .titlebar-close {
